@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 /log/*
 /report/*
+*.idea
 __pycache__/
 *.py[cod]
 *$py.class

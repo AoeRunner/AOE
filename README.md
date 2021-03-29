@@ -1,6 +1,7 @@
 # AOE
 
 ## 项目简介
+* 使用airtest和poco进行测试
 ## 功能特性
 * 可以用它测试web，app，h5，api
 ## 环境依赖
