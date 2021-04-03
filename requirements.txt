@@ -1,0 +1,10 @@
+pocoui
+airtest
+airtest-selenium
+pynput
+pytest
+poco
+pyyaml
+allure-pytest
+pytest-xdist
+selenium~=3.141.0

@@ -7,6 +7,7 @@
 # @Phone :13926528314
 # ================================================
 import logging
+import os
 import time
 
 from utils import root_dir
@@ -17,7 +18,7 @@ class CommonLog(object):
     封装logging模块
     """
 
-    def __init__(self, name="common_log", level: logging = logging.DEBUG):
+    def __init__(self, name="common_log", level: logging = logging.INFO):
         """
         实例化logging
         :param name: 日志名称
@@ -44,7 +45,8 @@ class CommonLog(object):
         :return:
         """
         time_stamp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-        file_write = logging.FileHandler(f"{root_dir}/appium_demo/log/{time_stamp}.log", encoding="utf-8")
+        log_dir = os.path.join(root_dir, "log", f"{time_stamp}.log")
+        file_write = logging.FileHandler(log_dir, encoding="utf-8")
         file_write.setFormatter(self.formatter)
         file_print = logging.StreamHandler()
         file_print.setFormatter(self.formatter)

@@ -1,13 +1,8 @@
 # ！/usr/bin/env python
 # -*- coding = utf-8 -*-
 # ================================================
-# @Time  :2021/3/29 21:58
+# @Time  :2021/4/3 17:12
 # @Author:tyh
 # @File  :__init__.py.py
 # @Phone :13926528314
 # ================================================
-import os
-
-root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-mydbs_dir = os.path.join(root_dir, "data", "mydbs")
-report_dir = os.path.join(root_dir, "report")
