@@ -9,10 +9,11 @@
 import os
 import shelve
 import time
-from typing import List
+from typing import List, Tuple
 
 import allure
-from airtest.core import api
+from airtest.core.api import snapshot, text, swipe, shell
+from airtest.core.helper import G
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from utils import mydbs_dir
@@ -25,11 +26,12 @@ class AppBasePage:
     """
     log = CommonLog("AppBasePage").add_handle()
 
-    def __init__(self):
+    def __init__(self, poco: AndroidUiautomationPoco = None):
         """
         初始化driver
         """
-        self.poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+        self.log.info("初始化poco")
+        self.poco = poco
 
     def snap_shot(self, value: List):
         """
@@ -40,25 +42,61 @@ class AppBasePage:
         with shelve.open(f"{mydbs_dir}/screenshot_dir") as db:
             screenshot_dir = db["screenshot_dir"]
         time_stamp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-        file_path = os.path.join(screenshot_dir, f"{time_stamp}_{value[1]}.jpg")
+        file_path = os.path.join(screenshot_dir, f"{time_stamp}_{value[1]}.png")
         self.log.info(f"截图--{file_path}")
         # 截图
-        api.snapshot(file_path)
+        snapshot(filename=file_path)
         # 日志中增加截图
-        allure.attach.file(f"{file_path}", f"{value[1]}", attachment_type=allure.attachment_type.JPG)
+        allure.attach.file(f"{file_path}", f"{value[1]}", attachment_type=allure.attachment_type.PNG)
 
-    def action(self, value: List, text=None):
+    def find(self, value: List):
         """
-        控件操作，默认进行按钮点击，当传入text时进行输入操作
+        根据定位值查找元素
         :param value: 定位值
-        :param text: 输入值
         :return:
         """
-        self.snap_shot(value)
-        if text:
-            self.log.info(f"{value[1]}--输入--{text}")
-            self.poco(value[0]).set_text(text)
+        # self.snap_shot(value)
+        loc_type = value[0]
+        loc_text = value[1]
+        loc_msg = value[2]
+        self.log.info(f"查找--{loc_msg}")
+        if loc_type == "name":
+            return self.poco(loc_text)
+        elif loc_type == "text":
+            return self.poco(text=loc_text)
+        elif loc_type == "resourceId":
+            return self.poco(resourceId=loc_text)
+
+    def action(self, value: List, input_text=None):
+        """
+        元素操作，默认进行点击，存在input_text时进行输入操作
+        :param value:
+        :param input_text:
+        :return:
+        """
+        if input_text is None:
+            self.find(value).click()
+            self.log.info(f"点击--{value[2]}")
         else:
-            self.log.info(f"点击--{value[1]}")
-            self.poco(value[0]).click()
+            self.find(value).set_text(input_text)
+            self.log.info(f"输入--{input_text}")
+        return self
+
+    def input_text(self, input_text):
+        """
+        使用airtest输入
+        :return:
+        """
+        self.log.info(f"输入--{input_text}")
+        text(input_text)
+        return self
+
+    def move(self):
+        """
+        移动
+        :param start:
+        :param end:
+        :return:
+        """
+        swipe((550, 250), (550, 1200))
         return self
