@@ -75,5 +75,5 @@ class CaseRunner:
 if __name__ == '__main__':
     # runner_args = parse_handle.runner_handle()
     # cases = runner_args.cases
-    cases = os.path.join(root_dir, "case", "web_case", "test_search.py")
+    cases = os.path.join(root_dir, "case", "app_case", "test_search.py")
     CaseRunner(cases).run()

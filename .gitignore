@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 /log/*
 /report/*
+/data/mydbs/*
 *.idea
 __pycache__/
 *.py[cod]

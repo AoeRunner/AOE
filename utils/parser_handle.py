@@ -26,9 +26,9 @@ class ParseHandle:
         self.parse.add_argument_group("caps_handle")
         # 添加参数
         self.parse.add_argument('--platformName', type=str, default="Android")
-        self.parse.add_argument('--deviceName', type=str, default="wework")
-        self.parse.add_argument('--appPackage', type=str, default="com.tencent.wework")
-        self.parse.add_argument('--appActivity', type=str, default=".launch.LaunchSplashActivity")
+        self.parse.add_argument('--device', type=str, default="127.0.0.1:62001")
+        self.parse.add_argument('--appPackage', type=str, default="com.baidu.BaiduMap")
+        self.parse.add_argument('--appActivity', type=str, default=".com.baidu.baidumaps.MapsActivity")
         self.parse.add_argument('--noReset', type=str, default="true", help="不清空缓存启动app")
         self.parse.add_argument('--waitForIdleTimeout', type=int, default=0, help="设置等待页面空闲状态的时间为0s")
         return self.parse.parse_args()
