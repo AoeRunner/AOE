@@ -7,6 +7,7 @@
 * 可以用它测试web，app，h5，api
 ## 环境依赖
 * 需要python3.7
+* 如果需要测试微信小程序，还需要下载tbs内核，打开微信中任意一个聊天框，输入 debugtbs.qq.com，点击进入TBS调试页面，再点击页面内的“安装线上内核”，然后重启微信之后poco即可抓取小程序界面的元素
 ## 部署步骤
 * 使用docker+jeknins部署至服务器
 * docker pull jenkins/jenkins
