@@ -53,14 +53,15 @@ class CaseRunner:
         # with shelve.open(f"{mydbs_dir}/log_dir") as db:
         #     db["log_dir"] = log_dir
 
-        # 创建截图目录,并保存
-        screenshot_dir = os.path.join(self.main_dir, "screenshot")
-        if not os.path.exists(screenshot_dir):
-            os.makedirs(screenshot_dir)
-        else:
-            self.log.info("报告目录已存在！！！")
-        with shelve.open(f"{mydbs_dir}/screenshot_dir") as db:
-            db["screenshot_dir"] = screenshot_dir
+        # 创建截图目录,并保存,非接口测试才需要截图
+        if self.cases.find("api") == 0:
+            screenshot_dir = os.path.join(self.main_dir, "screenshot")
+            if not os.path.exists(screenshot_dir):
+                os.makedirs(screenshot_dir)
+            else:
+                self.log.info("报告目录已存在！！！")
+            with shelve.open(f"{mydbs_dir}/screenshot_dir") as db:
+                db["screenshot_dir"] = screenshot_dir
 
         # 运行用例
         report_dir = os.path.join(self.main_dir, "report")
@@ -75,5 +76,5 @@ class CaseRunner:
 if __name__ == '__main__':
     # runner_args = parse_handle.runner_handle()
     # cases = runner_args.cases
-    cases = os.path.join(root_dir, "case", "app_case", "test_search.py")
+    cases = os.path.join(root_dir, "case", "api_case", "test_location_search.py")
     CaseRunner(cases).run()

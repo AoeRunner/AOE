@@ -1,0 +1,7 @@
+test_regional_search:
+  - [ "北京大学", "北京", "json" ]
+  - [ "厦门北站", "厦门", "json" ]
+
+test_circular_region_retrieval:
+  - [ "天安门", "38.76623,116.43213", "json" ]
+  - [ "故宫", "38.76623,116.43213", "json" ]
