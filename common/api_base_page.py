@@ -23,7 +23,7 @@ class BaseApi:
         """
         self.base_url = "http://api.map.baidu.com"
         self.s = requests.Session()
-        self.s.params = {"ak": "aOPvUj5bYNcHrUztVKG9FCKm6HkbcUF0"}
+        self.s.params = {"ak": ""}
 
     def send(self, method, url, **kwargs):
         """
